@@ -23,6 +23,8 @@ App runs at `http://localhost:8000` (web UI) and `http://localhost:8000/docs` (F
 
 Requires a `.env` file in the repo root with `ANTHROPIC_API_KEY=...` (see `.env.example`).
 
+**No API key is available in this dev environment** — the developer does not have access to the Claude Console, so `ANTHROPIC_API_KEY` cannot be set here. `/api/query` will fail at the Claude API call (auth error) when tested locally; this is expected and not a regression. Verification of changes should stop at confirming the app starts, static assets load, and non-Claude endpoints (e.g. `/api/courses`) work, or by exercising backend logic (e.g. `VectorStore`/`CourseSearchTool`) directly in a script rather than through a live `/api/query` call.
+
 ## Architecture
 
 This is a Retrieval-Augmented Generation (RAG) chatbot for querying course materials. FastAPI backend + vanilla JS frontend, ChromaDB for vector storage, Anthropic Claude for generation, tool-calling (not manual retrieval injection) for search.
